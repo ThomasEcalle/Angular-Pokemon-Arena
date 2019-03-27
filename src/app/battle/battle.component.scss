@@ -1,5 +1,5 @@
 .body {
-  padding: 50px;
+  padding: 10px;
 }
 
 .container {
@@ -10,9 +10,11 @@
 
 .fightContainer {
   display: flex;
+  background-image: url('https://pbs.twimg.com/media/DVMT-6OXcAE2rZY.jpg');
+  background-repeat: no-repeat;
   margin-right: 20px;
   align-items: center;
-  padding: 20px;
+  padding: 30px;
   justify-content: space-between;
   flex: 2;
 }

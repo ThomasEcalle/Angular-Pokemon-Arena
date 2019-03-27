@@ -10,7 +10,7 @@ import {whichPokemonStart} from '../../PokemonUtils';
 })
 export class BattleComponent implements OnInit {
 
-  title = 'Pokemon Battle 3000';
+  title;
   pokemon1: Pokemon;
   pokemon2: Pokemon;
   logs = Array<FightLogs>();
@@ -54,6 +54,7 @@ export class BattleComponent implements OnInit {
       'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/132.png'
     );
 
+    this.title = `${this.pokemon1.name} VS ${this.pokemon2.name}`;
     this.simulateFight();
   }
 
