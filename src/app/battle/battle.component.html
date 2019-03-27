@@ -1,0 +1,14 @@
+<div class="body">
+  <h1>
+    {{ title }}
+  </h1>
+
+  <div class="container">
+    <div class="fightContainer">
+      <app-pokemon id="pokemon1" [pokemon]="pokemon1" [isMain]="true"></app-pokemon>
+      <app-battle-button (onClick)="handleClick()"></app-battle-button>
+      <app-pokemon id="pokemon2" [pokemon]="pokemon2"></app-pokemon>
+    </div>
+    <app-fight-logs [logs]="logs"></app-fight-logs>
+  </div>
+</div>

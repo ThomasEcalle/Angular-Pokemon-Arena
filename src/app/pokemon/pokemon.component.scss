@@ -1,0 +1,73 @@
+p {
+  font-size: 12px;
+}
+
+#name {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+#life {
+  align-self: flex-end;
+}
+
+#caracteristicsContainer {
+  width: 200px;
+  border-radius: 20px;
+  border: 1px solid black;
+  text-align: center;
+  justify-content: center;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 200px;
+  border-radius: 20px;
+  text-align: center;
+  justify-content: center;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.picture {
+  width: 150px;
+  height: 150px;
+}
+
+.looser-picture {
+  width: 150px;
+  height: 150px;
+  filter: grayscale(100%);
+}
+
+.name-level {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.progressbarContainer {
+  border: 1px solid black;
+  border-radius: 12px;
+}
+
+.greenProgressBar {
+  height: 24px;
+  background-color: green;
+  border-radius: 10px;
+}
+
+.yellowProgressBar {
+  height: 24px;
+  background-color: yellow;
+  border-radius: 10px;
+}
+
+.redProgressBar {
+  height: 24px;
+  background-color: red;
+  border-radius: 10px;
+}

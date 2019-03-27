@@ -1,0 +1,31 @@
+<div class="container">
+
+  <ng-template [ngIf]="isMain">
+    <img
+      [ngClass]="{'picture':pokemon.hp >0, 'looser-picture': pokemon.hp <= 0}"
+      src="{{pokemon.backDefault}}">
+  </ng-template>
+  <ng-template [ngIf]="!isMain">
+    <img
+      [ngClass]="{'picture':pokemon.hp >0, 'looser-picture': pokemon.hp <= 0}"
+      src="{{pokemon.frontDefault}}">
+  </ng-template>
+
+  <div id="caracteristicsContainer">
+    <div class="name-level">
+      <p id="name">{{pokemon.name}}</p>
+      <p id="level">Lv {{pokemon.level}}</p>
+    </div>
+    <div class="progressbarContainer">
+      <div
+        [ngClass]="{'greenProgressBar': getHpPercent() > 50, 'yellowProgressBar': getHpPercent() <= 50 && getHpPercent() > 25 , 'redProgressBar': getHpPercent() <= 25}"
+        [style.width.%]="getHpPercent()"
+        [style.height.px]="24"
+      >
+      </div>
+    </div>
+    <ng-template [ngIf]="isMain">
+      <p id="life">{{pokemon.hp}} / {{pokemon.maxHp}}</p>
+    </ng-template>
+  </div>
+</div>

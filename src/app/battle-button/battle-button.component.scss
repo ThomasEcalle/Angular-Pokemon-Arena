@@ -1,0 +1,27 @@
+div {
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  width: 80px;
+  justify-content: space-between;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+div:active {
+  background-color: rgb(232, 71, 53);
+}
+
+div:hover {
+  cursor: grab;
+}
+
+p {
+  color: black;
+}
+
+.image {
+  width: 20px;
+  height: 20px;
+}
