@@ -1,8 +1,6 @@
 <h3>Logs</h3>
 <li *ngFor="let log of logs;">
-  <div
-    [colorLog]="log.type"
-  >
-    <p>{{log.text}}</p>
+  <div>
+    <p [colorLog]="log.type">{{log.text}}</p>
   </div>
 </li>

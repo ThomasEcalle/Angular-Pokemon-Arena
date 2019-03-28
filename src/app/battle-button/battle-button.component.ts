@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-battle-button',
@@ -8,6 +8,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 export class BattleButtonComponent implements OnInit {
 
   selected = false;
+  @Input() labels: string[];
   @Output() onClick = new EventEmitter<void>();
 
   constructor() {

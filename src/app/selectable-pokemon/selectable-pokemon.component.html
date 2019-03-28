@@ -1,0 +1,12 @@
+<div
+  [ngClass]="{'container': !selected, 'selectedContainer': selected}"
+  (click)="onSelect()"
+>
+  <img
+    ngClass="picture"
+    src="{{pokemon?.frontDefault}}">
+  <p id="name">{{pokemon?.name}}</p>
+  <p id="level">Lvl : {{pokemon?.level}}</p>
+  <p id="hp">HP : {{pokemon?.hp}}</p>
+  <p id="speed">Speed : {{pokemon?.speed}}</p>
+</div>

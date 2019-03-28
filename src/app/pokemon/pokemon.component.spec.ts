@@ -30,6 +30,7 @@ describe('PokemonComponent', () => {
       90,
       Type.ELECTRIC,
       new Move('eclair', 5, Type.ELECTRIC),
+      'https://i.pinimg.com/originals/f3/e1/b8/f3e1b8019f160f88531d8af792716b4f.png',
       'https://i.pinimg.com/originals/f3/e1/b8/f3e1b8019f160f88531d8af792716b4f.png'
     );
     fixture.detectChanges();

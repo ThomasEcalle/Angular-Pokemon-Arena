@@ -1,20 +1,21 @@
-<div class="container">
+<div
+  [ngClass]="{'container': !isAttacked, 'attacked': isAttacked}">
 
   <ng-template [ngIf]="isMain">
     <img
-      [ngClass]="{'picture':pokemon.hp >0, 'looser-picture': pokemon.hp <= 0}"
-      src="{{pokemon.backDefault}}">
+      [ngClass]="{'picture':pokemon?.hp >0, 'looser-picture': pokemon?.hp <= 0}"
+      src="{{pokemon?.backDefault}}">
   </ng-template>
   <ng-template [ngIf]="!isMain">
     <img
-      [ngClass]="{'picture':pokemon.hp >0, 'looser-picture': pokemon.hp <= 0}"
-      src="{{pokemon.frontDefault}}">
+      [ngClass]="{'picture':pokemon?.hp >0, 'looser-picture': pokemon?.hp <= 0}"
+      src="{{pokemon?.frontDefault}}">
   </ng-template>
 
   <div id="caracteristicsContainer">
     <div class="name-level">
-      <p id="name">{{pokemon.name}}</p>
-      <p id="level">Lv {{pokemon.level}}</p>
+      <p id="name">{{pokemon?.name}}</p>
+      <p id="level">Lv {{pokemon?.level}}</p>
     </div>
     <div class="progressbarContainer">
       <div
@@ -25,7 +26,7 @@
       </div>
     </div>
     <ng-template [ngIf]="isMain">
-      <p id="life">{{pokemon.hp}} / {{pokemon.maxHp}}</p>
+      <p id="life">{{pokemon?.hp}} / {{pokemon?.maxHp}}</p>
     </ng-template>
   </div>
 </div>

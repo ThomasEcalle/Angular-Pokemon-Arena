@@ -1,47 +1,29 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FightLogs, LogType} from './FightLogs';
+import {Component, OnInit} from '@angular/core';
+import {FightLogs} from './FightLogs';
+import {LoggerService, OnLogsListener} from '../services/logger-service';
 
 @Component({
   selector: 'app-fight-logs',
   templateUrl: './fight-logs.component.html',
   styleUrls: ['./fight-logs.component.scss']
 })
-export class FightLogsComponent implements OnInit {
+export class FightLogsComponent implements OnInit, OnLogsListener {
 
-  @Input() logs = Array<FightLogs>();
+  logs = Array<FightLogs>();
 
-  constructor() {
+  constructor(private loggerService: LoggerService) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.loggerService.subscribe(this);
   }
 
-  isAttack(log: FightLogs): boolean {
-    return true;
+  onLogAdded(log: FightLogs) {
+    this.logs.push(log);
   }
 
-  isInfos(log: FightLogs): boolean {
-    return log.type === LogType.INFOS;
+  async onClear() {
+    this.logs = await this.loggerService.getLogs();
   }
-
-  isWinner(log: FightLogs): boolean {
-    return log.type === LogType.WINNER;
-  }
-
-  isHplosed(log: FightLogs): boolean {
-    return log.type === LogType.LOST_HP;
-  }
-
-  getLogCssClass(log: FightLogs): string {
-    switch (log.type) {
-      case LogType.ATTACK:
-        return 'attack';
-      case LogType.WINNER:
-        return 'winner';
-      case LogType.LOST_HP:
-        return 'losed_hp';
-    }
-  }
-
 
 }
