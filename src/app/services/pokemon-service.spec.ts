@@ -48,4 +48,5 @@ describe('UserService', () => {
 
     http.expectOne(`https://pokeapi.co/api/v2/move/5`).flush(mockedMove);
   }));
+
 });

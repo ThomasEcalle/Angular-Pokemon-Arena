@@ -46,6 +46,9 @@ export class BattleService {
           this.logger.clearLogs();
           this.logger.writeLog(new FightLogs(`Starting fight between ${pokemon1.name} and ${pokemon2.name}`, new Date(), LogType.INFOS));
 
+          this.winner = undefined;
+          this.isPause = true;
+
           const starter = whichPokemonStart(pokemon1, pokemon2);
           const other = starter === pokemon1 ? pokemon2 : pokemon1;
 
@@ -69,6 +72,7 @@ export class BattleService {
         filter(() => !this.isPause),
         filter(() => !this.winner),
         tap(() => {
+          console.log(`isPause = ${this.isPause}`);
           const attackResult = this.attacker.attackOn(this.defender);
 
           this.logger.writeLog(new FightLogs(`${this.attacker.name} attacked ${this.defender.name} with ${attackResult.name} (${attackResult.damages} dommages)`, new Date(), LogType.ATTACK));
