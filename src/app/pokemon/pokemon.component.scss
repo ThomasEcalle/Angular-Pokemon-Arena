@@ -64,6 +64,18 @@ p {
   flex-direction: column;
 }
 
+.damagesReceived {
+  color: red;
+  font-size: 30px;
+  margin-bottom: 10px;
+  font-style: italic;
+  align-self: center;
+}
+
+.invisible {
+  opacity: 0;
+}
+
 .picture {
   width: 150px;
   height: 150px;

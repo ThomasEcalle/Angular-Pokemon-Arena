@@ -12,6 +12,10 @@
       src="{{pokemon?.frontDefault}}">
   </ng-template>
 
+  <div
+    [ngClass]="{'damagesReceived': isAttacked, 'invisible': !isAttacked}">
+    -{{lastReceivedDamages | number:'1.1-1'}} Hp
+  </div>
   <div id="caracteristicsContainer">
     <div class="name-level">
       <p id="name">{{pokemon?.name}}</p>

@@ -11,8 +11,17 @@ import {PokemonChooserComponent} from './pokemon-chooser/pokemon-chooser.compone
 import {ColorLogDirective} from './directives/color-log';
 import {BattleService} from './services/battle-service';
 import {LoggerService} from './services/logger-service';
-import { MenuComponent } from './menu/menu.component';
-import { SelectablePokemonComponent } from './selectable-pokemon/selectable-pokemon.component';
+import {MenuComponent} from './menu/menu.component';
+import {SelectablePokemonComponent} from './selectable-pokemon/selectable-pokemon.component';
+import {PokemonService} from './services/PokemonService';
+import {HttpClientModule} from '@angular/common/http';
+import {RouterModule, Routes} from '@angular/router';
+import {APP_BASE_HREF} from '@angular/common';
+
+const routes: Routes = [
+  {path: '', component: PokemonChooserComponent}, // path: '/'
+  {path: 'arena/:first/:second', component: BattleComponent},
+];
 
 @NgModule({
   declarations: [
@@ -28,9 +37,11 @@ import { SelectablePokemonComponent } from './selectable-pokemon/selectable-poke
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    RouterModule.forRoot(routes)
   ],
-  providers: [BattleService, LoggerService],
+  providers: [BattleService, LoggerService, PokemonService, {provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]
 })
 export class AppModule {

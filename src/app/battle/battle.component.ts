@@ -1,32 +1,64 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Pokemon} from '../../pokemon';
 import {BattleService} from '../services/battle-service';
+import {Subscription} from 'rxjs';
+import {mergeMap, tap} from 'rxjs/operators';
+import {ActivatedRoute, Params} from '@angular/router';
 
 @Component({
   selector: 'app-battle',
   templateUrl: './battle.component.html',
   styleUrls: ['./battle.component.scss']
 })
-export class BattleComponent implements OnInit {
+export class BattleComponent implements OnInit, OnDestroy {
 
   title;
   pokemon1: Pokemon;
   pokemon2: Pokemon;
   isLoading = false;
+  isFighting = false;
 
-  constructor(private battleService: BattleService) {
+  firstName: string;
+  secondName: string;
+  private subscriber: Subscription;
+
+  constructor(private battleService: BattleService, private route: ActivatedRoute) {
+  }
+
+  handlePause() {
+    this.isFighting = !this.isFighting;
+    this.battleService.setPause(!this.isFighting);
   }
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.battleService.initBattle().then((pokemons) => {
-      this.isLoading = false;
-      console.log(`retrieved pokemons : ${JSON.stringify(pokemons)}`);
-      [this.pokemon1, this.pokemon2] = pokemons;
-      console.log(`pokemon 1 : ${JSON.stringify(this.pokemon1)}`);
-      console.log(`pokemon 2 : ${JSON.stringify(this.pokemon2)}`);
-      this.title = `${this.pokemon1.name} VS ${this.pokemon2.name}`;
-    });
+
+    this.route.params
+      .pipe(
+        tap((params: Params) => {
+          this.firstName = params.first;
+          this.secondName = params.second;
+        }),
+        mergeMap(() => this.battleService.getPokemons(this.firstName, this.secondName)),
+        tap((pokemons: Pokemon[]) => {
+          this.isLoading = false;
+          [this.pokemon1, this.pokemon2] = pokemons;
+          this.title = `${this.pokemon1.name} VS ${this.pokemon2.name}`;
+        }),
+        mergeMap(() => {
+          return this.battleService.attack();
+        })
+      ).subscribe(
+      next => {
+        console.log('attack occured');
+      },
+      error => console.error('onError: %s', error),
+      () => console.log('onCompleted')
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriber.unsubscribe();
   }
 
 }

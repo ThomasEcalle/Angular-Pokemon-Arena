@@ -1,3 +1,34 @@
-<p>
-  pokemon-chooser works!
-</p>
+<div class="container">
+  <ng-template [ngIf]="isLoading">
+    <div class="center-on-page">
+      <div class="pokeball">
+        <div class="pokeball__button"></div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template [ngIf]="!isLoading">
+
+    <h1>Choose your 2 pokemons ! </h1>
+    <div
+      [ngClass]="{'invisibleButtonContainer': selectedPokemons.length !== 2, 'buttonContainer': selectedPokemons.length === 2}"
+    >
+      <app-battle-button
+        (onClick)="handleStartingFight()"
+        [labels]="['Fight !', 'Fight !']"
+      ></app-battle-button>
+    </div>
+    <div class="pokemonsContainer">
+      <div
+        *ngFor="let pokemon of pokemons;"
+      >
+        <div class="pokemon">
+          <app-selectable-pokemon
+            [selectablePokemon]="pokemon"
+            (selectEvent)="handleSelection(pokemon)"
+          ></app-selectable-pokemon>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>
+

@@ -1,10 +1,5 @@
 export class FightLogs {
-  readonly text: string;
-  readonly type: LogType;
-
-  constructor(text: string, type: LogType) {
-    this.text = text;
-    this.type = type;
+  constructor(readonly text: string, readonly date: Date, readonly type: LogType) {
   }
 }
 

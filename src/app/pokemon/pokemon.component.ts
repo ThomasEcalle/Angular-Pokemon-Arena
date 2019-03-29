@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Pokemon} from '../../pokemon';
+import {AttackResult, Pokemon} from '../../pokemon';
 import {BattleService, PokemonBattleListner} from '../services/battle-service';
 
 @Component({
@@ -12,14 +12,12 @@ export class PokemonComponent implements OnInit, PokemonBattleListner {
   @Input() pokemon: Pokemon;
   @Input() isMain = false;
   isAttacked = false;
+  lastReceivedDamages = 0;
 
   constructor(private battleService: BattleService) {
   }
 
   ngOnInit() {
-    if (this.pokemon) {
-      console.log(`On Pokemon init, pokemon = ${this.pokemon.name}`);
-    }
     this.battleService.subscribe(this);
   }
 
@@ -30,10 +28,18 @@ export class PokemonComponent implements OnInit, PokemonBattleListner {
     return this.pokemon.hp / this.pokemon.maxHp * 100;
   }
 
-  onPokemonAttack(attacker: Pokemon, defender: Pokemon) {
-    console.log(`${attacker.name} attack ${defender.name}`);
-    console.log(`this.pôkemon = ${this.pokemon.name}`);
-    console.log(`this.isMain = ${this.isMain}`);
-    this.isAttacked = defender === this.pokemon;
+  onPokemonAttack(attacker: Pokemon, defender: Pokemon, attackResult: AttackResult) {
+    console.log(`This.pokemon = ${JSON.stringify(this.pokemon)}`);
+    console.log(`attacker = ${JSON.stringify(attacker)}`);
+    console.log(`attacker = ${JSON.stringify(attacker)}`);
+    this.isAttacked = attacker.name !== this.pokemon.name;
+    if (attacker.name !== this.pokemon.name) {
+      this.lastReceivedDamages = attackResult.damages;
+      if (this.pokemon.hp <= 0) {
+        setTimeout(() => {
+          this.isAttacked = false;
+        }, 1000);
+      }
+    }
   }
 }

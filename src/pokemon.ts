@@ -1,6 +1,6 @@
 export class Pokemon {
   constructor(
-    readonly name: string,
+    public name: string,
     public level: number,
     public hp: number,
     public maxHp: number,
@@ -9,16 +9,38 @@ export class Pokemon {
     public specialAttack: number,
     public specialDefense: number,
     public speed: number,
-    readonly type: Type,
-    readonly move: Move,
-    readonly frontDefault: string,
-    readonly backDefault: string
+    public type: string,
+    public moves: Array<Move>,
+    public frontDefault: string,
+    public backDefault: string
   ) {
   }
 
-  public attackOn(other: Pokemon) {
-    const damages = this.move.calculateDamages(this, other);
+  static getPokemonFromJson(json): Pokemon {
+    return new Pokemon(
+      json.name,
+      10,
+      json.stats[5]['base_stat'] * 100,
+      json.stats[5]['base_stat'] * 100,
+      json.stats[4]['base_stat'],
+      json.stats[3]['base_stat'],
+      json.stats[2]['base_stat'],
+      json.stats[1]['base_stat'],
+      json.stats[0].base_stat,
+      json.types[0].type.name,
+      Array<Move>(),
+      json.sprites.front_default,
+      json.sprites.back_default
+    );
+  }
+
+  public attackOn(other: Pokemon,
+                  randomProvider: () => number = () => Math.floor(Math.random() * Math.floor(this.moves.length))
+  ): AttackResult {
+    const move = this.moves[randomProvider()];
+    const damages = move.calculateDamages(this, other);
     other.hp -= damages;
+    return new AttackResult(damages, move.name);
   }
 }
 
@@ -40,15 +62,19 @@ export enum Type {
   WATER
 }
 
+export class AttackResult {
+  constructor(readonly damages: number, readonly name: string) {
+  }
+}
+
 export class Move {
   constructor(
-    readonly name: string,
-    readonly basePower: number,
-    readonly type: Type
+    public name: string,
+    public power: number,
   ) {
   }
 
   public calculateDamages(attacker: Pokemon, target: Pokemon): number {
-    return Math.floor(Math.floor(Math.floor(2 * attacker.level / 5 + 2) * attacker.attack * this.basePower / target.defense));
+    return Math.floor(Math.floor(Math.floor(2 * attacker.level / 5 + 2) * attacker.attack * this.power / target.defense));
   }
 }

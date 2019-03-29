@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Move, Pokemon, Type} from '../../pokemon';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {SelectablePokemon} from '../pokemon-chooser/pokemon-chooser.component';
 
 @Component({
   selector: 'app-selectable-pokemon',
@@ -8,31 +8,17 @@ import {Move, Pokemon, Type} from '../../pokemon';
 })
 export class SelectablePokemonComponent implements OnInit {
 
-  pokemon: Pokemon;
-  selected = false;
+  @Input() selectablePokemon: SelectablePokemon;
+  @Output() selectEvent = new EventEmitter<void>();
 
   constructor() {
   }
 
   ngOnInit() {
-    this.pokemon = new Pokemon('pikachu',
-      10,
-      300,
-      300,
-      55,
-      40,
-      50,
-      50,
-      90,
-      Type.ELECTRIC,
-      new Move('eclair', 5, Type.ELECTRIC),
-      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png',
-      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/25.png'
-    );
   }
 
   onSelect() {
-    this.selected = !this.selected;
+    this.selectEvent.emit();
   }
 
 }

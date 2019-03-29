@@ -17,6 +17,6 @@ export class MenuComponent implements OnInit {
   }
 
   handleBattleToggle() {
-    this.battleService.toggleBattleState();
+    this.playStopButtonClicked.emit();
   }
 }
