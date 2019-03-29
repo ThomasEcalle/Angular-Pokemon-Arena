@@ -1,5 +1,4 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {BattleService} from '../services/battle-service';
 
 @Component({
   selector: 'app-menu',
@@ -10,7 +9,7 @@ export class MenuComponent implements OnInit {
 
   @Output() playStopButtonClicked = new EventEmitter<void>();
 
-  constructor(private battleService: BattleService) {
+  constructor() {
   }
 
   ngOnInit() {

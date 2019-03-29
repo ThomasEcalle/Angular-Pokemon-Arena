@@ -18,6 +18,7 @@ describe('BattleButtonComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(BattleButtonComponent);
     component = fixture.componentInstance;
+    component.labels = ['stop', 'play'];
     fixture.detectChanges();
   });
 
@@ -32,24 +33,24 @@ describe('BattleButtonComponent', () => {
 
   it('should be stop after 1 click', () => {
     const view = fixture.debugElement.nativeElement;
-    const div = view.querySelector('div');
-    div.click();
+    const a = view.querySelector('a');
+    a.click();
     fixture.detectChanges();
     expect(view.querySelector('p').textContent).toBe('stop');
   });
 
   it('should be play after 2 click', () => {
     const view = fixture.debugElement.nativeElement;
-    const div = view.querySelector('div');
-    div.click();
-    div.click();
+    const a = view.querySelector('a');
+    a.click();
+    a.click();
     fixture.detectChanges();
     expect(view.querySelector('p').textContent).toBe('play');
   });
 
   it('should emit event on click', () => {
     jest.spyOn(component.onClick, 'emit');
-    fixture.debugElement.nativeElement.querySelector('div').click();
+    fixture.debugElement.nativeElement.querySelector('a').click();
     fixture.detectChanges();
     expect(component.onClick.emit).toHaveBeenCalled();
   });

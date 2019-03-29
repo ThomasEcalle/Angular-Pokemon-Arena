@@ -1,6 +1,6 @@
 <h3>Logs</h3>
 <li *ngFor="let log of loggerService.logs;">
   <div>
-    <p [colorLog]="log.type">{{log.date | date:'h:mm:s'}} - {{log.text}}</p>
+    <p [colorLog]="log.type">{{log.date | date:'HH:mm:s'}} - {{log.text}}</p>
   </div>
 </li>

@@ -1,6 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MenuComponent } from './menu.component';
+import {MenuComponent} from './menu.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {BattleButtonComponent} from '../battle-button/battle-button.component';
 
 describe('MenuComponent', () => {
   let component: MenuComponent;
@@ -8,9 +10,11 @@ describe('MenuComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MenuComponent ]
+      declarations: [MenuComponent, BattleButtonComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: []
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

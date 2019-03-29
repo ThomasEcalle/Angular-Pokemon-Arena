@@ -12,4 +12,8 @@ export class LoggerService {
   public writeLog(log: FightLogs) {
     this.logs.push(log);
   }
+
+  public clearLogs() {
+    this.logs = [];
+  }
 }

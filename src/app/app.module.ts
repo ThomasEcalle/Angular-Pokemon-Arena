@@ -17,10 +17,12 @@ import {PokemonService} from './services/PokemonService';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule, Routes} from '@angular/router';
 import {APP_BASE_HREF} from '@angular/common';
+import {CreatePokemonComponent} from './create-pokemon/create-pokemon.component';
 
 const routes: Routes = [
   {path: '', component: PokemonChooserComponent}, // path: '/'
   {path: 'arena/:first/:second', component: BattleComponent},
+  {path: 'createPokemon', component: CreatePokemonComponent},
 ];
 
 @NgModule({
@@ -33,7 +35,8 @@ const routes: Routes = [
     PokemonChooserComponent,
     ColorLogDirective,
     MenuComponent,
-    SelectablePokemonComponent
+    SelectablePokemonComponent,
+    CreatePokemonComponent
   ],
   imports: [
     BrowserModule,

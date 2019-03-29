@@ -9,7 +9,8 @@ export class PokemonService {
   constructor(private http: HttpClient) {
   }
 
-  private getPokemonMoveDetails(move: JSON): Observable<Move> {
+
+  getPokemonMoveDetails(move: { url: string }): Observable<Move> {
     const url = move['url'];
     console.log(`requesting move with url : ${url}`);
     return this.http

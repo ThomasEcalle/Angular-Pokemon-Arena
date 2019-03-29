@@ -1,8 +1,12 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {PokemonComponent} from './pokemon.component';
-import {Move, Pokemon, Type} from '../../pokemon';
+import {Move, Pokemon} from '../../pokemon';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {BattleService} from '../services/battle-service';
+import {LoggerService} from '../services/logger-service';
+import {PokemonService} from '../services/PokemonService';
+import {HttpClient, HttpHandler} from '@angular/common/http';
 
 describe('PokemonComponent', () => {
   let component: PokemonComponent;
@@ -11,7 +15,8 @@ describe('PokemonComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [PokemonComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [BattleService, LoggerService, PokemonService, HttpClient, HttpHandler]
     })
       .compileComponents();
   }));
@@ -19,7 +24,7 @@ describe('PokemonComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PokemonComponent);
     component = fixture.componentInstance;
-    component.selectablePokemon = new Pokemon('pikachu',
+    component.pokemon = new Pokemon('pikachu',
       10,
       300,
       300,
@@ -28,8 +33,8 @@ describe('PokemonComponent', () => {
       50,
       50,
       90,
-      Type.ELECTRIC,
-      new Move('eclair', 5, Type.ELECTRIC),
+      'electric',
+      [new Move('eclair', 5)],
       'https://i.pinimg.com/originals/f3/e1/b8/f3e1b8019f160f88531d8af792716b4f.png',
       'https://i.pinimg.com/originals/f3/e1/b8/f3e1b8019f160f88531d8af792716b4f.png'
     );

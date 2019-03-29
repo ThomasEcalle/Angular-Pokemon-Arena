@@ -17,6 +17,7 @@
         [labels]="['Fight !', 'Fight !']"
       ></app-battle-button>
     </div>
+    <a [routerLink]="['createPokemon']">Créer son pokemon</a>
     <div class="pokemonsContainer">
       <div
         *ngFor="let pokemon of pokemons;"

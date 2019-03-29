@@ -6,6 +6,7 @@ import {LoggerService} from '../services/logger-service';
   templateUrl: './fight-logs.component.html',
   styleUrls: ['./fight-logs.component.scss']
 })
+
 export class FightLogsComponent implements OnInit {
   constructor(private loggerService: LoggerService) {
   }

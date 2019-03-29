@@ -43,6 +43,7 @@ export class BattleService {
         }),
         tap((pokemon) => {
           pokemon2 = pokemon;
+          this.logger.clearLogs();
           this.logger.writeLog(new FightLogs(`Starting fight between ${pokemon1.name} and ${pokemon2.name}`, new Date(), LogType.INFOS));
 
           const starter = whichPokemonStart(pokemon1, pokemon2);
