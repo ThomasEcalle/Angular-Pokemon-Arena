@@ -33,7 +33,7 @@ export class BattleComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.isLoading = true;
 
-    this.route.params
+    this.subscriber = this.route.params
       .pipe(
         tap((params: Params) => {
           this.firstName = params.first;
@@ -49,12 +49,12 @@ export class BattleComponent implements OnInit, OnDestroy {
           return this.battleService.attack();
         })
       ).subscribe(
-      next => {
-        console.log('attack occured');
-      },
-      error => console.error('onError: %s', error),
-      () => console.log('onCompleted')
-    );
+        next => {
+          console.log('attack occured');
+        },
+        error => console.error('onError: %s', error),
+        () => console.log('onCompleted')
+      );
   }
 
   ngOnDestroy(): void {
