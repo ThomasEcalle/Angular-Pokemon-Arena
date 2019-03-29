@@ -48,13 +48,7 @@ export class BattleComponent implements OnInit, OnDestroy {
         mergeMap(() => {
           return this.battleService.attack();
         })
-      ).subscribe(
-        next => {
-          console.log('attack occured');
-        },
-        error => console.error('onError: %s', error),
-        () => console.log('onCompleted')
-      );
+      ).subscribe();
   }
 
   ngOnDestroy(): void {

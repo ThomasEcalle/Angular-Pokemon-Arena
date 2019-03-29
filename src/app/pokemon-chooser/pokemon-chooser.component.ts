@@ -25,12 +25,14 @@ export class PokemonChooserComponent implements OnInit {
   ngOnInit() {
     this.isLoading = true;
     this.pokemonService.getAllPokemons().subscribe(
-      pokemons => {
+      (pokemons) => {
         this.isLoading = false;
         console.log(`loading pokemon finished`);
         pokemons.map(pokemon => this.pokemons.push(new SelectablePokemon(pokemon)));
       },
-      error => console.error(`errror ${error}`)
+      (error) => {
+        console.error(`errror ${error}`);
+      }
     );
   }
 

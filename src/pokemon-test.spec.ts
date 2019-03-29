@@ -1,4 +1,4 @@
-import {Move, Pokemon, Type} from './Pokemon';
+import {Move, Pokemon} from './Pokemon';
 import {whichPokemonStart} from './PokemonUtils';
 
 const ditto = new Pokemon('ditto',
@@ -25,9 +25,9 @@ const pikachu = new Pokemon('pikachu',
   48,
   48,
   48,
-  50,
+  60,
   'electric',
-  [new Move('eclair', 50)],
+  [new Move('eclair', 50), new Move('fatal-foudre', 90)],
   'front',
   'back'
 );
@@ -47,10 +47,17 @@ describe('Pokemons speed comparaison', () => {
 
 describe('Pokemons fighting tests', () => {
 
+  it('should second attack be selected', () => {
+    const dittoHp = ditto.hp;
+    const secondAttackDamages = pikachu.moves[1].calculateDamages(pikachu, ditto);
+    pikachu.attackOn(ditto, () => 1);
+    expect(ditto.hp).toBe(dittoHp - secondAttackDamages);
+  });
+
   it('Pikachu should attack ditto', () => {
     const dittoInitialHp = ditto.hp;
-    const pikachuAttackDamages = pikachu.move.calculateDamages(pikachu, ditto);
-    pikachu.attackOn(ditto);
+    const pikachuAttackDamages = pikachu.moves[0].calculateDamages(pikachu, ditto);
+    pikachu.attackOn(ditto, () => 0);
     expect(ditto.hp).toBe(dittoInitialHp - pikachuAttackDamages);
   });
 });
